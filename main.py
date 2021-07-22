@@ -1,15 +1,16 @@
 # import telebot
+# import os
 from logging import DEBUG
-from telebot import types, TeleBot
-from config import token
-from flask import Flask
+from telebot import TeleBot
+from config import TOKEN, APP_URL
+# from flask import Flask
 
-bot = TeleBot(token=token)
-server = Flask(__name__)
+bot = TeleBot(token=TOKEN)
+# server = Flask(__name__)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
-    print(message)
+    # print(message)
     bot.reply_to(message, "Howdy, how are you doing? sucker!")
 
 #block to handle only text messages
@@ -18,16 +19,36 @@ def echo_all(message):
     bot.reply_to(message, message.text)
     # bot.send_message(message.text)
 
-markup = types.ReplyKeyboardMarkup(row_width=2)
-itembtn1 = types.KeyboardButton('a')
-itembtn2 = types.KeyboardButton('b')
-itembtn3 = types.KeyboardButton('v')
-markup.add(itembtn1, itembtn2)
+@bot.callback_query_handler(func=lambda call:True)
+def message_handler(message):
+    bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
 
-@server.route('/')
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url=APP_URL+TOKEN)
+# def gen_markup():
+#     markup = types.InlineKeyboardMarkup()
+#     markup.row_width = 2
+#     markup.add(types.InlineKeyboardButton("Yes", callback_data="cb_yes"), types.InlineKeyboardButton("No", callback_data="cb_no"))
+#     return markup
+
+# @bot.message_handler(func=lambda message:True, content_types=types.KeyboardButton)
+# def button_click(message):
+#     bot.reply_to(message, message.)
+
+
+# markup = types.ReplyKeyboardMarkup()
+# itembtn1 = types.KeyboardButton('a')
+# itembtn2 = types.KeyboardButton('b')
+# itembtn3 = types.KeyboardButton('c')
+# itembtn4 = types.KeyboardButton('d')
+# itembtn5 = types.KeyboardButton('e')
+# itembtn6 = types.KeyboardButton('f')
+# markup.row(itembtn1, itembtn2, itembtn3)
+# markup.row(itembtn4, itembtn5, itembtn6)
+
+
+# @server.route('/')
+# def webhook():
+#     bot.remove_webhook()
+#     bot.set_webhook(url=APP_URL+TOKEN)
 
 
 if DEBUG == True:
@@ -35,4 +56,4 @@ if DEBUG == True:
     bot.polling()
 else:
     if __name__ == "__main__":
-        server.run(host)
+        server.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
