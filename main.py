@@ -1,11 +1,11 @@
 # import telebot
-# import os
+import os
 from logging import DEBUG
-from telebot import TeleBot
+import telebot
 from config import TOKEN, APP_URL
-# from flask import Flask
+from flask import Flask
 
-bot = TeleBot(token=TOKEN)
+bot = telebot.TeleBot(token=TOKEN)
 server = Flask(__name__)
 
 @bot.message_handler(commands=['start', 'help'])
@@ -17,8 +17,7 @@ def send_welcome(message):
 @bot.message_handler(func=lambda message:True, content_types=['text'])
 def echo_all(message):
     bot.reply_to(message, message.text)
-    # bot.send_message(message.text)
-
+    
 # @bot.callback_query_handler(func=lambda call:True)
 # def message_handler(message):
 #     bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_mar
