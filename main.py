@@ -6,7 +6,7 @@ from config import TOKEN, APP_URL
 # from flask import Flask
 
 bot = TeleBot(token=TOKEN)
-# server = Flask(__name__)
+server = Flask(__name__)
 
 @bot.message_handler(commands=['start', 'help'])
 def send_welcome(message):
@@ -19,9 +19,10 @@ def echo_all(message):
     bot.reply_to(message, message.text)
     # bot.send_message(message.text)
 
-@bot.callback_query_handler(func=lambda call:True)
-def message_handler(message):
-    bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_markup())
+# @bot.callback_query_handler(func=lambda call:True)
+# def message_handler(message):
+#     bot.send_message(message.chat.id, "Yes/no?", reply_markup=gen_mar
+#     kup())
 
 # def gen_markup():
 #     markup = types.InlineKeyboardMarkup()
