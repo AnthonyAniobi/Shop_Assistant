@@ -7,6 +7,6 @@
 </ul>
 
 <b>Profile image of the image bot</b>
-<img src="_screenshots/bot1.png">
+<img src="_screenshots/bot1.png" width="200">
 <b>chat screen of the bot</b>
-<img src="_screenshots/bot2.png" width:"200">
+<img src="_screenshots/bot2.png" width="200">
