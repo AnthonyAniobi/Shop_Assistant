@@ -6,7 +6,7 @@
 <li>Tackle users complaints</li>
 </ul>
 
-<b>Profile image of the image bot</b>
-<img src="_screenshots/bot1.png" width="200">
-<b>chat screen of the bot</b>
+<b>Profile image of the image bot</b><br>
+<img src="_screenshots/bot1.png" width="200"><br><br>
+<b>chat screen of the bot</b><br>
 <img src="_screenshots/bot2.png" width="200">
