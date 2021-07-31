@@ -1,19 +1,17 @@
-# import telebot
 import os
 from logging import DEBUG
 import telebot
 from config import TOKEN, APP_URL
 from flask import Flask
 
-bot = telebot.TeleBot(token=TOKEN)
+bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
-@bot.message_handler(commands=['start', 'help'])
+
+@bot.message_handler(commands=['start'])
 def send_welcome(message):
-    # print(message)
     bot.reply_to(message, "Howdy, how are you doing? sucker!")
 
-#block to handle only text messages
 @bot.message_handler(func=lambda message:True, content_types=['text'])
 def echo_all(message):
     bot.reply_to(message, message.text)
