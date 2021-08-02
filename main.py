@@ -2,10 +2,10 @@ import os
 from logging import DEBUG
 import telebot
 from config import TOKEN, APP_URL
-from flask import Flask
+from fastapi import FastAPI
 
 bot = telebot.TeleBot(TOKEN)
-server = Flask(__name__)
+server = FastAPI()
 
 
 @bot.message_handler(commands=['start'])
@@ -43,10 +43,10 @@ def echo_all(message):
 # markup.row(itembtn4, itembtn5, itembtn6)
 
 
-# @server.route('/')
-# def webhook():
-#     bot.remove_webhook()
-#     bot.set_webhook(url=APP_URL+TOKEN)
+@server.route('/')
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url=APP_URL+TOKEN)
 
 
 if DEBUG == True:
